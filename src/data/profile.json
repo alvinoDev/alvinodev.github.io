@@ -117,6 +117,12 @@
     ],
     "certificates": [
         {
+            "courseName": "Ver todos los certificados",
+            "issuingOrganization": "Linkedin",
+            "issueDate": "Actualidad",
+            "credentialUrl": "https://www.linkedin.com/in/alvinodev/details/certifications/"
+        },
+        {
             "courseName": "3er Lugar — Hackathon ONE G9 Latam",
             "issuingOrganization": "Alura Latam · No Country · Oracle Next Education",
             "issueDate": "ago. 2026",
@@ -125,14 +131,8 @@
         {
             "courseName": "Oracle Cloud Infrastructure 2025 Certified Foundations Associate",
             "issuingOrganization": "Oracle",
-            "issueDate": "2025",
+            "issueDate": "may. 2026",
             "credentialUrl": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=FBB04AE92E79DD6D21594E0F8B0A6FD67578C5A6A07A4B1825D0CBED64CC48BA"
-        },
-        {
-            "courseName": "Ver todos los certificados",
-            "issuingOrganization": "Linkedin",
-            "issueDate": "Actualidad",
-            "credentialUrl": "https://www.linkedin.com/in/alvinodev/details/certifications/"
         },
         {
             "courseName": "Desarrollo de Aplicaciones Web con PHP y Laravel",
