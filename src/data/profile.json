@@ -7,6 +7,7 @@
         "image": "/profile.webp",
         "email": "jhonnyalvin07@gmail.com",
         "headline": "Me encanta dar vida a ideas digitales",
+        "headlineHighlight": "vida",
         "summary": "Soy desarrollador Web Full Stack con más de tres años de experiencia transformo ideas en soluciones digitales robustas y funcionales. Mi pasión reside en aprender y aplicar las tecnologías más relevantes para resolver desafíos complejos. He trabajado con PHP y Laravel para el desarrollo backend y explorado frameworks modernos como Astro y Vuejs para construir interfaces web atractivas y de alto rendimiento. Mi compromiso es con la mejora continua y la entrega de soluciones web innovadoras y adaptables.",
         "social": [
             {

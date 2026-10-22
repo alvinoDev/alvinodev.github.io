@@ -1,20 +1,12 @@
 ---
 import Button from './Button.astro';
-
-// Podrías cargar estos items desde un JSON o un array
-const navItems = [
-  { icon: 'ri-user-line text-lg', label: 'Sobre mí', href: '#about', section: 'about' },  // Ej. activo
-  { icon: 'ri-briefcase-line text-lg', label: 'Experiencia', href: '#experience', section: 'experience' },
-  { icon: 'ri-book-line text-lg', label: 'Educación', href: '#qualification', section: 'qualification' },
-  { icon: 'ri-code-s-slash-line text-lg', label: 'Proyectos', href: '#projects', section: 'projects' },
-  { icon: 'ri-chat-1-line text-lg', label: 'Contacto', href: '#contact', section: 'contact' },
-];
+import { navItems } from '../data/nav';
 ---
 <nav class="flex items-center space-x-2 lg:space-x-4">
   {navItems.map((item, index) => (
     <Button 
         to={item.href}
-        iconClass={item.icon}
+        iconClass={`${item.icon} text-lg`}
         text={item.label}
         variant={index === 0 ? 'primary' : 'secondary'}
         size="sm"

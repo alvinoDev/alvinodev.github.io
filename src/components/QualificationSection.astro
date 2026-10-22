@@ -72,69 +72,19 @@ const { educationData, certificatesData } = Astro.props;
 </section>
 
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
-		// Sistema de filtrado de proyectos
-		const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
-		const projectCards = document.querySelectorAll('.project-card');
-		
-		// Función para filtrar proyectos
-		function filterProjects() {
-			// Obtener todas las tecnologías seleccionadas
-			const selectedSkills = Array.from(filterCheckboxes)
-				.filter(checkbox => checkbox.checked)
-				.map(checkbox => checkbox.dataset.skill);
-			
-			// Si no hay filtros seleccionados, mostrar todos los proyectos
-			if (selectedSkills.length === 0) {
-				projectCards.forEach(card => {
-					card.classList.remove('hidden');
-				});
-				return;
-			}
-			
-			// Filtrar proyectos según las tecnologías seleccionadas
-			projectCards.forEach(card => {
-				const projectSkills = card.dataset.skills.split(',');
-				
-				// Verificar si el proyecto tiene al menos una de las tecnologías seleccionadas
-				const hasMatchingSkill = selectedSkills.some(skill => 
-					projectSkills.includes(skill)
-				);
-				
-				if (hasMatchingSkill) {
-					card.classList.remove('hidden');
-				} else {
-					card.classList.add('hidden');
-				}
-			});
-		}
-		
-		// Agregar event listeners a todos los checkboxes
-		filterCheckboxes.forEach(checkbox => {
-			checkbox.addEventListener('change', filterProjects);
-		});
+  const tabButtons = document.querySelectorAll('[data-target]');
+  const tabContents = document.querySelectorAll('[data-content]');
 
-		// Sistema de tabs
-		const buttons = document.querySelectorAll('[data-target]');
-		const contents = document.querySelectorAll('[data-content]');
+  tabButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-target');
+      if (!targetId) return;
 
-		buttons.forEach(button => {
-			button.addEventListener('click', () => {
-				const targetId = button.dataset.target; // e.g., "#education" or "#certificates"
+      tabContents.forEach((content) => content.classList.add('hidden'));
+      tabButtons.forEach((tab) => tab.classList.remove('text-green'));
 
-				contents.forEach(content => {
-					content.classList.add('hidden'); // Añade 'hidden' a todos los contenidos
-				});
-				buttons.forEach(btn => {
-					btn.classList.remove('text-green'); // Quita 'text-green' de todos los botones
-				});
-
-				const targetContent = document.querySelector(targetId);
-				if (targetContent) {
-					targetContent.classList.remove('hidden'); // Remueve 'hidden' del contenido seleccionado
-				}
-				button.classList.add('text-green'); // Añade 'text-green' al botón que se hizo clic
-			});
-		});
-	});
+      document.querySelector(targetId)?.classList.remove('hidden');
+      button.classList.add('text-green');
+    });
+  });
 </script>
