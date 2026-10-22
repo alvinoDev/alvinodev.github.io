@@ -116,30 +116,46 @@ const headlineEnd = headlineRest.join(highlight);
 				<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 					
 					{ data.projects.map(project => (
-						<article class="project-card relative group isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 w-full h-96 cursor-pointer" data-skills={project.skills.join(',')}>
-							<img src={project.image} alt={project.title} class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
-							
-							<!-- Overlay inicial -->
-							<div class="absolute inset-0 bg-linear-to-t from-black/70 via-black-900/40 transition-opacity duration-500 group-hover:opacity-0"></div>
-							
-							<!-- Contenido inicial - visible por defecto -->
-							<div class="z-10 transition-opacity duration-500 group-hover:opacity-0">
+						<article class="project-card relative group isolate flex flex-col justify-end overflow-hidden rounded-2xl px-6 pb-6 pt-40 w-full min-h-96 lg:h-96 lg:px-8 lg:pb-8 lg:pt-40" data-skills={project.skills.join(',')}>
+							<img src={project.image} alt={project.title} class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 lg:group-hover:scale-105">
+
+							<!-- Degradado de fondo -->
+							<div class="absolute inset-0 bg-linear-to-t from-black/90 via-black/60 to-transparent lg:from-black/70 lg:via-black-900/40 lg:transition-opacity lg:duration-500 lg:group-hover:opacity-0"></div>
+
+							<!-- Título visible solo en desktop -->
+							<div class="z-10 hidden lg:block lg:transition-opacity lg:duration-500 lg:group-hover:opacity-0">
 								<div class="text-sm text-gray-300"> {project.title} </div>
 							</div>
-							
-							<!-- Contenido hover - información completa -->
-							<div class="absolute inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col p-8">
+
+							<!-- Detalle: siempre visible en mobile, al hover en desktop -->
+							<div class="z-10 flex flex-col lg:absolute lg:inset-0 lg:bg-black/90 lg:opacity-0 lg:transition-opacity lg:duration-500 lg:group-hover:opacity-100 lg:p-8">
 								<span class="text-sm text-lightgray mb-2"> {project.client} </span>
 								<h3 class="text-2xl font-bold text-green-500 mb-3"> {project.title} </h3>
-								<p class="text-gray-300 text-sm mb-6"> {project.summary} </p>
-								<div class="flex gap-3">
-									<Button 
-										text={project.isLocal ? "Local" : "Ver"}
+								<p class="text-gray-300 text-sm mb-3"> {project.summary} </p>
+
+								{project.stack && project.stack.length > 0 && (
+									<p class="text-xs text-white/50 mb-4"> {project.stack.join(' · ')} </p>
+								)}
+
+								<div class="flex flex-wrap gap-3">
+									<Button
+										text={project.isLocal ? "Local" : project.repo ? "Demo" : "Ver"}
 										variant="secondary"
 										iconClass={project.isLocal ? "ri-cloud-off-line" : "ri-link"}
 										href={project.url}
 										target={project.isLocal ? null : '_blank'}
 									/>
+
+									{project.repo && (
+										<Button
+											text="Repo"
+											variant="secondary"
+											iconClass="ri-github-fill"
+											href={project.repo}
+											target="_blank"
+											ariaLabel={`Ver repositorio de ${project.title} en GitHub`}
+										/>
+									)}
 								</div>
 							</div>
 						</article>
@@ -228,9 +244,18 @@ const headlineEnd = headlineRest.join(highlight);
 
 	initProjectFilter();
 
+	const successBanner = document.getElementById('contact-success');
+
 	if (new URLSearchParams(window.location.search).get('enviado') === '1') {
-		document.getElementById('contact-success')?.classList.remove('hidden');
+		successBanner?.classList.remove('hidden');
 		document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+
+		// Limpia el parámetro para que el mensaje no reaparezca al recargar.
+		window.history.replaceState({}, '', window.location.pathname);
+
+		window.setTimeout(() => {
+			successBanner?.classList.add('hidden');
+		}, 30_000);
 	}
 
 	const downloadBtn = document.getElementById('download-cv-btn');

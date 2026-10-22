@@ -60,7 +60,9 @@ import MobileNav from './MobileNav.astro';
     function smoothScrollTo(target) {
         const element = document.querySelector(target);
         if (element) {
-            const headerOffset = 120;//(120)
+            // En mobile la navegación está abajo, así que no hace falta reservar
+            // espacio para un header que no está en la parte superior.
+            const headerOffset = window.matchMedia('(max-width: 767px)').matches ? 16 : 120;
             const elementPosition = element.offsetTop;
             const offsetPosition = elementPosition - headerOffset;
 

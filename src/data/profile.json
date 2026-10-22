@@ -38,7 +38,11 @@
         "tailwindcss",
         "bootstrap",
         "figma",
-        "wordpress"
+        "wordpress",
+        "python",
+        "fastapi",
+        "docker",
+        "oracle"
     ],
     "experience": [
         {
@@ -101,7 +105,7 @@
             "location": "Online",
             "title": "Backend Java Developer",
             "startDate": "jul. 2025",
-            "endDate": "Actualidad"
+            "endDate": "ago. 2026"
         },
         {
             "institution": "U.A.J.M.S. - Tarija",
@@ -112,6 +116,12 @@
         }
     ],
     "certificates": [
+        {
+            "courseName": "3er Lugar — Hackathon ONE G9 Latam",
+            "issuingOrganization": "Alura Latam · No Country · Oracle Next Education",
+            "issueDate": "ago. 2026",
+            "credentialUrl": ""
+        },
         {
             "courseName": "Ver todos los certificados",
             "issuingOrganization": "Linkedin",
@@ -126,6 +136,28 @@
         }
     ],
     "projects": [
+        {
+            "title": "TechMind",
+            "client": "Hackathon ONE G9 Latam · 3er lugar",
+            "image": "/11_cover.webp",
+            "summary": "API inteligente y app web que organiza contenido técnico: clasificación automática, extracción de términos clave y búsqueda semántica, con retroalimentación humana para reentrenar los modelos. Todo expuesto en JSON, listo para integrarse.",
+            "url": "http://144.22.60.240:8000/",
+            "repo": "https://github.com/No-Country-simulation/g9-latam-team-04-esp",
+            "skills": [
+                "python",
+                "fastapi",
+                "oracle",
+                "docker",
+                "tailwindcss"
+            ],
+            "stack": [
+                "Python + scikit-learn",
+                "FastAPI",
+                "Oracle DB",
+                "Docker",
+                "OCI"
+            ]
+        },
         {
             "title": "Gestión de Contenido para Iglesia",
             "client": "Freelance",
