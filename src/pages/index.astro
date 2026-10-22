@@ -1,0 +1,349 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import data from '../data/profile.json';
+import QualificationSection from '../components/QualificationSection.astro';
+
+---
+
+<Layout>
+	<main class="text-white mt-0 mx-auto w-[90%] max-w-300">
+		<section id="about"  class="flex flex-col items-center justify-center text-center pt-10">
+			{/* Foto de perfil 166x166 px */}
+			<img src={data.basics.image} alt={data.basics.name} class="w-30 h-30 rounded-full mb-6" />
+
+			<h2 class="text-3xl md:text-4xl font-bold mb-1"> Hey, soy {data.basics.name} </h2>
+
+			<span class="text-sm md:text-base text-lightgray mb-4"> {data.basics.label} </span>
+
+			<h1 class="text-4xl md:text-5xl font-bold my-10 max-w-3xl">
+				<Fragment set:html={data.basics.headline.replace('vida', '<span style="color: #1ED760;">vida</span>')} />
+			</h1>
+
+			<p class="text-base md:text-lg font-normal max-w-3xl mb-8 text-lightgray"> {data.basics.summary}</p>
+
+			{/* Botones de redes sociales */}
+			<div class="flex space-x-4">
+				{data.basics.social.map(network => (
+					<Button
+					href={network.url}
+					target='_blank'
+					variant="secondary"
+					size="md"
+					iconClass={network.iconClass}
+					isIconOnly
+					ariaLabel={network.network}
+					/>
+				))}
+
+				<Button
+					id="download-cv-btn"
+					text="Descargar CV"
+					href="/CV.pdf"
+					variant="secondary"
+					size="md"
+					iconClass="ri-download-cloud-2-line"
+					ariaLabel="Descargar CV"
+				/>
+			</div>
+		</section>
+
+		<section id="experience" class="flex flex-col items-center justify-center  text-white mt-24 md:mx-32 mx-auto">
+			<div class="flex items-center py-14">
+				<i class="text-3xl mr-6 ri-briefcase-line"></i>
+				<h1 class="text-4xl font-bold">Experiencia laboral</h1>
+			</div>
+			
+			<ol class="relative border-s-2 border-gray-200 dark:border-white/40">
+				{data.experience.map(job => (
+					<li class="mb-10 ms-6">
+						<span class="absolute flex items-center justify-center w-4 h-4 bg-white-100 rounded-full -start-2 ring-8 ring-white dark:ring-white/20 dark:bg-green">
+						</span>
+
+						<time class="block mb-2 text-sm font-light leading-none text-lightgray dark:text-lightgray"> {job.startDate} - {job.endDate} </time>
+						<h2 class="flex items-center mb-1 text-2xl font-bold text-green"> {job.position} </h2>
+						<h3 class="flex items-center mb-1 text-xl font-semibold text-black dark:text-white"> {job.company} </h3>
+						
+						{job.detailSumary && job.detailSumary.length > 0 && (
+							<ul class="list-disc list-outside ml-5 space-y-1 text-base font-normal text-lightgray dark:text-lightgray">
+								{job.detailSumary.map(detail => (
+									<li>{detail}</li>
+								))}
+							</ul>
+						)}
+					</li>
+				))}
+			</ol>
+
+		</section>
+
+		<QualificationSection educationData={data.education} certificatesData={data.certificates} />
+
+		<section id="projects" class="px-6 mt-24 md:mx-32 mx-auto text-white">
+			<div class="flex items-center justify-center py-14">
+				<i class="text-3xl mr-6 ri-code-s-slash-line"></i>
+				<h1 class="text-4xl font-bold">Proyectos</h1>
+			</div>
+		
+			<!-- Filtro por Skills -->
+			<div class="flex items-center gap-4 mb-6">
+				<span class="text-lg">Filtrar por Skills</span>
+				<i class="ri-equalizer-line text-xl"></i>
+			</div>
+			<div class="flex flex-wrap gap-3 mb-10">
+				{data.skills.map(skill => (
+					<div class="flex">
+						<input type="checkbox" id={skill} class="peer hidden filter-checkbox" data-skill={skill} />
+						<label for={skill} class="select-none cursor-pointer border-2 border-white/24 text-white/24 px-4 py-2 rounded-full transition-colors duration-200 ease-in-out peer-checked:bg-white/24 peer-checked:text-white peer-checked:border-transparent filter-btn">{skill}</label>
+					</div>
+				))}
+			</div>
+		
+			<!-- Tarjetas de proyectos -->
+			<div class="py-6">
+				<!-- Grid responsive: 1 columna móvil, 2 desktop, 3 XL -->
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+					
+					{ data.projects.map(project => (
+						<article class="project-card relative group isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 w-full h-96 cursor-pointer" data-skills={project.skills.join(',')}>
+							<img src={project.image} alt={project.title} class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+							
+							<!-- Overlay inicial -->
+							<div class="absolute inset-0 bg-linear-to-t from-black/70 via-black-900/40 transition-opacity duration-500 group-hover:opacity-0"></div>
+							
+							<!-- Contenido inicial - visible por defecto -->
+							<div class="z-10 transition-opacity duration-500 group-hover:opacity-0">
+								<div class="text-sm text-gray-300"> {project.title} </div>
+							</div>
+							
+							<!-- Contenido hover - información completa -->
+							<div class="absolute inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col p-8">
+								<span class="text-sm text-lightgray mb-2"> {project.client} </span>
+								<h3 class="text-2xl font-bold text-green-500 mb-3"> {project.title} </h3>
+								<p class="text-gray-300 text-sm mb-6"> {project.summary} </p>
+								<div class="flex gap-3">
+									<Button 
+										text={project.isLocal ? "Local" : "Ver"}
+										variant="secondary"
+										iconClass={project.isLocal ? "ri-cloud-off-line" : "ri-link"}
+										href={project.url}
+										target={project.isLocal ? null : '_blank'}
+									/>
+								</div>
+							</div>
+						</article>
+					))}				
+				</div>
+			</div>
+		</section>
+
+		<section id="contact" class="py-14 md:mx-32 mx-auto">
+			<!-- Título de la sección con descripción -->
+			<div class="flex flex-col items-center justify-center py-14">
+				<div class="flex items-center">
+					<i class="text-3xl mr-4 ri-chat-1-line"></i>
+					<h1 class="text-4xl font-bold">Contacto</h1>
+				</div>
+				<span class="text-lightgray mt-2">
+					¿Listo para llevar tu idea al siguiente nivel?
+				</span>
+			</div>
+		
+			<!-- Formulario -->
+			<form class="max-w-xl mx-auto font-normal text-sm py-6 space-y-6">
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<!-- Nombre Completo -->
+					<div class="flex flex-col">
+						<label for="name" class="text-white pb-2">Nombre Completo</label>
+						<input type="text" id="name" name="name" placeholder="Ingresa tu nombre completo"
+							class="bg-transparent border-2 border-white/16 rounded-full px-4 py-2 text-lightgray focus:text-white focus:border-white hover:border-lightgray outline-none transition" />
+					</div>
+					
+					<!-- Correo Electrónico -->
+					<div class="flex flex-col">
+						<label for="email" class="text-white pb-2">Correo Electrónico</label>
+						<input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico"
+							class="bg-transparent border-2 border-white/16 rounded-full px-4 py-2 text-lightgray focus:text-white focus:border-white hover:border-lightgray outline-none transition" />
+					</div>
+				</div>
+		
+				<!-- Asunto / Motivo del Mensaje -->
+				<div class="flex flex-col">
+					<label for="subject" class="text-white pb-2">Asunto / Motivo del Mensaje</label>
+					<input type="text" id="subject" name="subject" placeholder="Escribe el motivo de tu mensaje"
+						class="bg-transparent border-2 border-white/16 rounded-full px-4 py-2 text-lightgray focus:text-white focus:border-white hover:border-lightgray outline-none transition" />
+				</div>
+		
+				<!-- Mensaje -->
+				<div class="flex flex-col">
+					<label for="message" class="text-white pb-2">Mensaje</label>
+					<textarea id="message" name="message" placeholder="Escribe tu mensaje aquí..." rows="4"
+						class="bg-transparent border-2 border-white/16 rounded-2xl px-4 py-2 text-lightgray focus:text-white focus:border-white hover:border-lightgray outline-none transition"></textarea>
+				</div>
+		
+				<!-- Botón de Enviar -->
+				<Button 
+					text="Enviar Mensaje"
+					variant="secondary"
+					size="sm"
+					iconClass="ri-send-plane-fill text-lg"
+				/>
+			</form>
+		</section>		
+		
+	</main>
+</Layout>
+
+<script>
+	import { jsPDF } from "jspdf";
+	import data from '../data/profile.json';
+
+	const downloadBtn = document.getElementById('download-cv-btn');
+
+	downloadBtn.addEventListener('click', (e) => {
+		e.preventDefault();
+		generateCV();
+	});
+	
+	function generateCV() {
+		// --- 1. CONFIGURACIÓN Y CONSTANTES DE DISEÑO ---
+		const doc = new jsPDF('p', 'mm', 'a4'); // p: portrait, mm: millimeters, a4: paper size
+		const MARGIN = 12; //15
+		const PAGE_WIDTH = doc.internal.pageSize.getWidth();
+		const CONTENT_WIDTH = PAGE_WIDTH - MARGIN * 2;
+		const RIGHT_COLUMN_X = PAGE_WIDTH - MARGIN;
+		const FONT_PRIMARY = 'Helvetica';
+		let y = 16; // Cursor vertical inicial 20
+
+		// Función auxiliar para manejar saltos de página
+		const checkPageBreak = (currentY) => {
+			if (currentY > 270) { // Un poco antes del final de la página (297mm)
+				doc.addPage();
+				return MARGIN; // Resetear 'y' para la nueva página
+			}
+			return currentY;
+		};
+
+		// Función auxiliar para dibujar los títulos de sección
+		const drawSectionHeader = (text) => {
+			y = checkPageBreak(y + 10);
+			doc.setFont(FONT_PRIMARY, "bold");
+			doc.setFontSize(11);
+			doc.text(text, MARGIN, y);
+			y += 2;
+			doc.setDrawColor(0, 0, 0);
+			doc.line(MARGIN, y, PAGE_WIDTH - MARGIN, y);
+			y += 8;
+		};
+
+		// --- 2. ENCABEZADO ---
+		doc.setFont(FONT_PRIMARY, "bold");
+		doc.setFontSize(16);
+		doc.text(data.basics.fullname, PAGE_WIDTH / 2, y, { align: 'center' });
+		y += 8;
+
+		doc.setFont("helvetica", "italic");
+		doc.setFontSize(9);
+		doc.setTextColor(0, 130, 255);
+		const contactInfo = `${data.basics.location ? data.basics.location + '  •' : ''}  ${data.basics.social[0].url}  •  ${data.basics.email}`;
+		doc.text(contactInfo, PAGE_WIDTH / 2, y, { align: 'center' });
+		y += 6;
+		doc.line(MARGIN, y, PAGE_WIDTH - MARGIN, y);
+		y += 8;
+
+		// --- 3. RESUMEN PROFESIONAL ---
+		doc.setTextColor(58, 58, 60);
+		doc.setFont("helvetica", "normal");
+		doc.setFontSize(10);
+		const summaryLines = doc.splitTextToSize(data.basics.summary, CONTENT_WIDTH);
+		doc.text(summaryLines, MARGIN, y);
+		y += summaryLines.length * 3;
+		
+		
+		// --- 4. EXPERIENCIA LABORAL ---
+		doc.setTextColor(0, 0, 0);
+		drawSectionHeader("EXPERIENCIA LABORAL");
+
+		data.experience.forEach(job => {
+			y = checkPageBreak(y);
+			const startY = y; // Guardamos la 'y' inicial del bloque
+			
+			// Columna Izquierda
+			doc.setFont(FONT_PRIMARY, "bold");
+			doc.setFontSize(9);
+			doc.text(job.company, MARGIN, y);
+			y += 4;
+			doc.setFont("helvetica", "italic");
+			doc.text(job.position, MARGIN, y);
+			y += 8;
+
+			doc.setFontSize(10);
+			doc.setTextColor(58, 58, 60);
+			const detailLines = doc.splitTextToSize(job.summary, CONTENT_WIDTH);
+			doc.setFont("helvetica", "normal");
+			doc.text(detailLines, MARGIN, y);
+			y += detailLines.length * 4;
+
+			const leftHeight = y - startY;
+
+			// Columna Derecha (la dibujamos al final para alinearla con el 'startY')
+			doc.setFont(FONT_PRIMARY, "bold");
+			doc.setTextColor(0, 0, 0);
+			doc.text(job.workMode, RIGHT_COLUMN_X, startY, { align: 'right' });
+			doc.setFontSize(9);
+			doc.setFont("helvetica", "italic");
+			doc.text(`${job.startDate} – ${job.endDate}`, RIGHT_COLUMN_X, startY + 4, { align: 'right' });
+			
+			// Actualizamos la 'y' global
+			y = startY + leftHeight + 4; //5 Añadimos un padding después de cada trabajo
+		});
+		y -= 10;
+
+		// --- 5. EDUCACIÓN ---
+		drawSectionHeader("EDUCACIÓN");
+
+		data.education.forEach(edu => {
+		  y = checkPageBreak(y);
+		  const startY = y;
+		  doc.setFont(FONT_PRIMARY, "bold");
+		  doc.setFontSize(10);
+		  doc.text(edu.institution, MARGIN, startY);
+		  doc.setFont("helvetica", "normal");
+		  doc.text(edu.title, MARGIN, startY + 4);
+
+		  doc.setFont(FONT_PRIMARY, "bold");
+		  doc.text(edu.location, RIGHT_COLUMN_X, startY, { align: 'right' });
+		  doc.setFont("helvetica", "normal");
+		  doc.text(edu.endDate, RIGHT_COLUMN_X, startY + 4, { align: 'right' });
+		  y += 12;
+		});
+		y -= 8;
+
+		// --- 6. SKILLS ADICIONALES ---
+		drawSectionHeader("SKILLS");
+
+		let x = MARGIN;
+		doc.setFont("helvetica", "bold");
+		doc.setFontSize(8);
+		data.skills.forEach(skill => {
+			const skillName = skill.toUpperCase();
+			const skillWidth = doc.getTextWidth(skillName) + 8; // Ancho del texto + padding
+			
+			// Si no cabe en la línea actual, saltamos a la siguiente
+			if (x + skillWidth > PAGE_WIDTH - MARGIN) {
+				x = MARGIN;
+				y += 8;
+			}
+
+			doc.setFillColor(230, 230, 230); // Color de fondo del tag
+			doc.roundedRect(x, y - 4, skillWidth, 6, 2, 2, 'F'); // Dibuja el rectángulo redondeado
+			doc.text(skillName, x + 4, y); // Escribe el texto dentro
+			x += skillWidth + 2; // Mueve el cursor horizontal
+		});
+
+		// --- 7. GUARDAR EL DOCUMENTO ---
+		// doc.save(`CV-${data.basics.name.replace(/\s+/g, '_')}.pdf`); // Guarda el PDF en el disco
+		doc.output('dataurlnewwindow'); // Abre el PDF en una nueva ventana
+
+	}
+</script>

@@ -1,0 +1,85 @@
+---
+import Logo from './Logo.astro';
+import DesktopNav from './DesktopNav.astro';
+import MobileNav from './MobileNav.astro';
+
+---
+
+<header class="hidden md:block sticky top-6 mx-auto w-[90%] max-w-[1200px] z-50" >
+  <div class="flex items-center justify-between bg-white/8 dark:bg-black/20 backdrop-blur-md rounded-full p-4">
+    <Logo />
+
+    <DesktopNav />
+  </div>
+</header>
+
+<div class="block md:hidden fixed bottom-4 left-0 right-0 mx-auto w-[90%] max-w-[1200px] z-50">
+  <MobileNav />
+</div>
+
+
+<script>
+    let currentSection = 'about';
+    let ticking = false;
+
+    // 1. Detecta la sección activa en el scroll
+    function detectActiveSection() {
+        const sections = document.querySelectorAll('section[id]');
+        let newCurrentSection = '';
+
+        // Encontrar la última sección que ha pasado la parte superior de la vista
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 150; // Offset (-150)
+            if (window.scrollY >= sectionTop) {
+                newCurrentSection = section.getAttribute('id');
+            }
+        });
+
+        // Si la sección cambia, notifica a los demás componentes
+        if (newCurrentSection && newCurrentSection !== currentSection) {
+            currentSection = newCurrentSection;
+
+            // Disparamos un evento personalizado
+            const event = new CustomEvent('section-change', {
+                detail: { sectionId: currentSection }
+            });
+            window.dispatchEvent(event);
+        }
+        ticking = false;
+    }
+
+    // 2. Listener de scroll optimizado (throttled)
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(detectActiveSection);
+            ticking = true;
+        }
+    });
+
+    // 3. Smooth scroll para TODOS los enlaces de navegación
+    function smoothScrollTo(target) {
+        const element = document.querySelector(target);
+        if (element) {
+            const headerOffset = 120;//(120)
+            const elementPosition = element.offsetTop;
+            const offsetPosition = elementPosition - headerOffset;
+
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+    }
+
+    // 4. Se ejecuta una vez que la página carga
+    document.addEventListener('DOMContentLoaded', () => {
+        // Inicializa el estado la primera vez
+        detectActiveSection();
+
+        // Agrega el click listener a todos los enlaces de navegación
+        document.querySelectorAll('.nav_link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = link.getAttribute('href');
+                smoothScrollTo(target);
+            });
+        });
+    });
+</script>

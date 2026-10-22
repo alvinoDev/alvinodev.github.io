@@ -1,0 +1,71 @@
+---
+// Podrías cargar estos items desde un JSON o un array
+const navItems = [
+  { icon: 'ri-user-line', label: 'Sobre mí', href: '#about', section: 'about' },  // Ej. activo
+  { icon: 'ri-briefcase-line', label: 'Experiencia', href: '#experience', section: 'experience' },
+  { icon: 'ri-book-line', label: 'Educación', href: '#qualification', section: 'qualification' },
+  { icon: 'ri-code-s-slash-line', label: 'Proyectos', href: '#projects', section: 'projects' },
+  { icon: 'ri-chat-1-line', label: 'Contacto', href: '#contact', section: 'contact' },
+];
+---
+
+<div class="flex items-center justify-between bg-white/8 dark:bg-black/20 backdrop-blur-md rounded-full p-3">
+  {navItems.map(item => (
+    <a
+      href={item.href}
+      class="mobile-nav-item nav_link flex items-center justify-center rounded-full font-medium cursor-pointer transition-colors duration-400 ease-in-out bg-black/32 dark:bg-white/16 text-white hover:bg-white/25 w-12 h-12"
+      data-section={item.section}
+      title={item.label}
+      aria-label={item.label}
+    >
+      <i class:list={[item.icon, "text-lg transition-colors duration-400 ease-in-out"]}></i>
+      <span class="opacity-0 -translate-x-3 invisible w-0 ml-0 overflow-hidden transition-all duration-400 ease-in-out text-sm">
+        {item.label}
+      </span>
+    </a>
+  ))}
+</div>
+
+<script>
+  // Lógica de UI y animación para la navegación móvil
+  let currentMobileSection = 'about';
+
+  function updateMobileNavLinks(activeSection) {
+    currentMobileSection = activeSection;
+    const mobileLinks = document.querySelectorAll('.mobile-nav-item');
+    
+    mobileLinks.forEach(link => {
+      const section = link.getAttribute('data-section');
+      const navText = link.querySelector('span');
+      
+      if (section === activeSection) {
+        // Estilo activo y expansión
+        link.classList.remove('bg-black/32', 'dark:bg-white/16', 'text-white', 'hover:bg-white/25', 'w-12', 'h-12');
+        link.classList.add('bg-green', 'text-black', 'hover:bg-green/90', 'px-4', 'py-3');
+        if (navText) {
+          navText.classList.remove('opacity-0', 'translate-x-[-10px]', 'invisible', 'w-0', 'ml-0');
+          navText.classList.add('opacity-100', 'translate-x-0', 'visible', 'w-auto', 'ml-2');
+        }
+      } else {
+        // Estilo inactivo y contraído
+        link.classList.remove('bg-green', 'text-black', 'hover:bg-green/90', 'px-4', 'py-3');
+        link.classList.add('bg-black/32', 'dark:bg-white/16', 'text-white', 'hover:bg-white/25', 'w-12', 'h-12');
+        if (navText) {
+          navText.classList.remove('opacity-100', 'translate-x-0', 'visible', 'w-auto', 'ml-2');
+          navText.classList.add('opacity-0', 'translate-x-[-10px]', 'invisible', 'w-0', 'ml-0');
+        }
+      }
+    });
+  }
+
+  // Escucha el evento global de cambio de sección
+  window.addEventListener('section-change', (e) => {
+    const { sectionId } = e.detail;
+    updateMobileNavLinks(sectionId);
+  });
+
+  // Actualización inicial
+  document.addEventListener('DOMContentLoaded', () => {
+    updateMobileNavLinks(currentMobileSection);
+  });
+</script>

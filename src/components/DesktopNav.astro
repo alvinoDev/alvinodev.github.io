@@ -1,0 +1,57 @@
+---
+import Button from './Button.astro';
+
+// Podrías cargar estos items desde un JSON o un array
+const navItems = [
+  { icon: 'ri-user-line text-lg', label: 'Sobre mí', href: '#about', section: 'about' },  // Ej. activo
+  { icon: 'ri-briefcase-line text-lg', label: 'Experiencia', href: '#experience', section: 'experience' },
+  { icon: 'ri-book-line text-lg', label: 'Educación', href: '#qualification', section: 'qualification' },
+  { icon: 'ri-code-s-slash-line text-lg', label: 'Proyectos', href: '#projects', section: 'projects' },
+  { icon: 'ri-chat-1-line text-lg', label: 'Contacto', href: '#contact', section: 'contact' },
+];
+---
+<nav class="flex items-center space-x-2 lg:space-x-4">
+  {navItems.map((item, index) => (
+    <Button 
+        to={item.href}
+        iconClass={item.icon}
+        text={item.label}
+        variant={index === 0 ? 'primary' : 'secondary'}
+        size="sm"
+        class="desktop-nav-link nav_link"
+        data-section={item.section}
+    />
+  ))}
+</nav>
+
+<script>
+  // Lógica de UI para la navegación de escritorio
+  function updateDesktopNavLinks(activeSection) {
+
+    const desktopLinks = document.querySelectorAll('.desktop-nav-link');
+
+    desktopLinks.forEach(link => {
+      const section = link.getAttribute('data-section');
+
+      if (section === activeSection) {
+        link.classList.remove('bg-black/32', 'dark:bg-white/16', 'backdrop-blur-md', 'text-white', 'hover:bg-white/25');
+        link.classList.add('bg-green', 'text-black', 'hover:bg-green/90');
+      } else {
+        link.classList.remove('bg-green', 'text-black', 'hover:bg-green/90');
+        link.classList.add('bg-black/32', 'dark:bg-white/16', 'backdrop-blur-md', 'text-white', 'hover:bg-white/25');
+      }
+    });
+  }
+
+  // Escucha el evento global de cambio de sección
+  window.addEventListener('section-change', (e) => {
+    const { sectionId } = e.detail;
+    updateDesktopNavLinks(sectionId);
+  });
+
+  // Actualización inicial al cargar la página
+  document.addEventListener('DOMContentLoaded', () => {
+    // Asumimos 'about' como inicial o lo dejamos sin activar
+    updateDesktopNavLinks('about');
+  });
+</script>

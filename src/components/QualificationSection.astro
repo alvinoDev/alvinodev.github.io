@@ -1,0 +1,140 @@
+---
+import TimelineItem from './TimelineItem.astro';
+
+interface Education {
+  institution: string;
+  title: string;
+  endDate: string;
+}
+
+interface Certificate {
+  courseName: string;
+  issuingOrganization: string;
+  issueDate: string;
+  credentialUrl?: string;
+}
+
+interface Props {
+  educationData: Education[];
+  certificatesData: Certificate[];
+}
+
+const { educationData, certificatesData } = Astro.props;
+---
+
+<section id="qualification" class="flex flex-col text-white mt-24 md:mx-32 mx-auto">
+
+  <div class="flex items-center justify-center py-14">
+    <i class="text-3xl mr-6 ri-book-line"></i>
+    <h1 class="text-4xl font-bold">Formación</h1>
+  </div>
+
+  <div class="max-w-xl mx-auto">
+    <!-- TABS -->
+    <div class="flex justify-evenly mb-6">
+        <div class="text-xl font-medium cursor-pointer text-green" data-target="#qualification_education">
+            <i class="ri-graduation-cap-line text-2xl pr-1"></i> Educación
+        </div>
+
+        <div class="text-xl font-medium cursor-pointer" data-target="#qualification_certificates">
+            <i class="ri-book-marked-line text-2xl pr-1"></i> Reconocimientos
+        </div>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="grid grid-cols-1 justify-center">
+      <!-- Contenido Educación -->
+      <div data-content id="qualification_education">
+        {educationData.map((edu, index) => (
+          <TimelineItem
+            title={edu.title}
+            subtitle={edu.institution}
+            date={edu.endDate}
+            isRightAligned={index % 2 !== 0}
+          />
+        ))}
+      </div>
+
+      <!-- Contenido Certificados -->
+      <div class="hidden" data-content id="qualification_certificates">
+        {certificatesData.map((cert, index) => (
+          <TimelineItem
+            title={cert.courseName}
+            subtitle={cert.issuingOrganization}
+            date={cert.issueDate}
+            url={cert.credentialUrl}
+            isRightAligned={index % 2 !== 0}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		// Sistema de filtrado de proyectos
+		const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
+		const projectCards = document.querySelectorAll('.project-card');
+		
+		// Función para filtrar proyectos
+		function filterProjects() {
+			// Obtener todas las tecnologías seleccionadas
+			const selectedSkills = Array.from(filterCheckboxes)
+				.filter(checkbox => checkbox.checked)
+				.map(checkbox => checkbox.dataset.skill);
+			
+			// Si no hay filtros seleccionados, mostrar todos los proyectos
+			if (selectedSkills.length === 0) {
+				projectCards.forEach(card => {
+					card.classList.remove('hidden');
+				});
+				return;
+			}
+			
+			// Filtrar proyectos según las tecnologías seleccionadas
+			projectCards.forEach(card => {
+				const projectSkills = card.dataset.skills.split(',');
+				
+				// Verificar si el proyecto tiene al menos una de las tecnologías seleccionadas
+				const hasMatchingSkill = selectedSkills.some(skill => 
+					projectSkills.includes(skill)
+				);
+				
+				if (hasMatchingSkill) {
+					card.classList.remove('hidden');
+				} else {
+					card.classList.add('hidden');
+				}
+			});
+		}
+		
+		// Agregar event listeners a todos los checkboxes
+		filterCheckboxes.forEach(checkbox => {
+			checkbox.addEventListener('change', filterProjects);
+		});
+
+		// Sistema de tabs
+		const buttons = document.querySelectorAll('[data-target]');
+		const contents = document.querySelectorAll('[data-content]');
+
+		buttons.forEach(button => {
+			button.addEventListener('click', () => {
+				const targetId = button.dataset.target; // e.g., "#education" or "#certificates"
+
+				contents.forEach(content => {
+					content.classList.add('hidden'); // Añade 'hidden' a todos los contenidos
+				});
+				buttons.forEach(btn => {
+					btn.classList.remove('text-green'); // Quita 'text-green' de todos los botones
+				});
+
+				const targetContent = document.querySelector(targetId);
+				if (targetContent) {
+					targetContent.classList.remove('hidden'); // Remueve 'hidden' del contenido seleccionado
+				}
+				button.classList.add('text-green'); // Añade 'text-green' al botón que se hizo clic
+			});
+		});
+	});
+</script>

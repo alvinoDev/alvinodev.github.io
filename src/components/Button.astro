@@ -1,0 +1,131 @@
+---
+// Definicion de PROPS con valores por defecto
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline' | 'transparent';
+
+  //Tamaños disponibles
+  size?: 'sm' | 'md' | 'lg';
+
+  // Tipo de botón (determina la funcionalidad)
+  type?: 'button' | 'submit' | 'reset';
+
+  // Para enlaces externos o internos
+  href?: string;
+
+  // Para enlaces externos
+  target?: string;
+
+  // Para navegación interna
+  to?: string;
+
+  // Posición del icono
+  iconPosition?: 'left' | 'right';
+  // Nombre del icono (usaremos una convención para los iconos)
+  iconClass?: string;
+
+  // Si el botón es un icono solamente
+  isIconOnly?: boolean;
+
+  // Texto del botón
+  text?: string;
+
+  // Clases adicionales
+  class?: string;
+
+  // ID para el botón (útil para JavaScript)
+  id?: string;
+
+  // Para accesibilidad
+  ariaLabel?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'sm',
+  type = 'button',
+  href,
+  target,
+  to,
+  iconPosition = 'left',
+  iconClass,
+  isIconOnly = false,
+  text,
+  class: className = '',
+  id,
+  ariaLabel,
+  ...rest
+} = Astro.props;
+
+// Determinamos qué componente renderizar basado en las props
+const Tag = href ? 'a' : to ? 'a' : 'button';
+
+// Construimos las clases CSS basadas en las variantes
+const baseClasses = 'flex items-center justify-center rounded-full font-medium cursor-pointer transition-colors duration-400 ease-in-out';
+
+const variantClasses = {
+  primary: 'bg-green text-black hover:bg-green/90',
+  secondary: 'bg-black/32 dark:bg-white/16 backdrop-blur-md text-white hover:bg-white/25',
+  outline: 'bg-transparent text-white border border-white/16 hover:border-white/40',
+  transparent: 'bg-transparent text-white hover:text-gray-200'
+};
+
+const textButtonSizeClasses = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-5 py-3 text-base',
+  lg: 'px-6 py-4 text-lg'
+};
+
+// Clases para botones de solo icono
+const iconButtonSizeClasses = {
+  sm: 'w-10 h-10 text-lg', // w/h y tamaño de icono
+  md: 'w-12 h-12 text-xl',
+  lg: 'w-14 h-14 text-2xl'
+};
+
+// Decidimos qué set de clases de tamaño usar
+const finalSizeClasses = isIconOnly ? iconButtonSizeClasses[size] : textButtonSizeClasses[size];
+
+const finalClasses = [
+  baseClasses,
+  variantClasses[variant],
+  finalSizeClasses,
+  className
+].join(' ');
+---
+
+{/* Renderizamos el botón con la etiqueta correcta */}
+<Tag
+  {id}
+  class={finalClasses}
+  {href}
+  href={to ? to : href}
+  target={target}
+  type={Tag === 'button' ? type : null}
+  aria-label={ariaLabel || text}
+  title={ariaLabel || text}
+  {...rest}
+>
+  {/* Renderizamos icono a la izquierda (si hay texto) */}
+  {iconClass && !isIconOnly && iconPosition === 'left' && (
+    <i class:list={[iconClass, { 'mr-2': !!text }]} />
+  )}
+
+  {/* Renderizamos el icono para botón de solo icono */}
+  {iconClass && isIconOnly && (
+    <i class={iconClass} />
+  )}
+
+  {/* 
+    Renderizamos el span SOLO si hay texto.
+    Esto es crucial para tu botón móvil que se expande. 
+    El span existirá en el DOM pero puede ser ocultado con clases de Tailwind.
+  */}
+  {text && !isIconOnly && (
+    <span>{text}</span>
+  )}
+
+  {/* Renderizamos icono a la derecha (si hay texto) */}
+  {iconClass && !isIconOnly && iconPosition === 'right' && (
+    <i class:list={[iconClass, { 'ml-2': !!text }]} />
+  )}
+</Tag>

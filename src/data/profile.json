@@ -1,0 +1,242 @@
+{
+    "basics": {
+        "name": "Jhonny",
+        "fullname": "Jhonny Alvino C.",
+        "location": "",
+        "label": "Ingeniero Informático & Software Developer",
+        "image": "/profile.webp",
+        "email": "jhonnyalvin07@gmail.com",
+        "headline": "Me encanta dar vida a ideas digitales",
+        "summary": "Soy desarrollador Web Full Stack con más de tres años de experiencia transformo ideas en soluciones digitales robustas y funcionales. Mi pasión reside en aprender y aplicar las tecnologías más relevantes para resolver desafíos complejos. He trabajado con PHP y Laravel para el desarrollo backend y explorado frameworks modernos como Astro y Vuejs para construir interfaces web atractivas y de alto rendimiento. Mi compromiso es con la mejora continua y la entrega de soluciones web innovadoras y adaptables.",
+        "social": [
+            {
+                "network": "LinkedIn",
+                "url": "https://www.linkedin.com/in/alvinodev/",
+                "iconClass": "ri-linkedin-box-fill"
+            },
+            {
+                "network": "Github",
+                "url": "https://github.com/alvinoDev",
+                "iconClass": "ri-github-fill"
+            }
+        ]
+    },
+    "skills": [
+        "html5",
+        "css3",
+        "javascript",
+        "php",
+        "laravel",
+        "java",
+        "mysql",
+        "astro",
+        "vuejs",
+        "react",
+        "nextjs",
+        "shadcn",
+        "tailwindcss",
+        "bootstrap",
+        "figma",
+        "wordpress"
+    ],
+    "experience": [
+        {
+            "position": "Desarrollador Full Stack",
+            "company": "Freelance | Consultor de Desarrollo Web & UI/UX",
+            "workMode": "Remoto",
+            "startDate": "abr. 2024",
+            "endDate": "Actualidad",
+            "summary": "Durante este periodo, me he consolidado como Desarrollador FullStack independiente, colaborando con diversas empresas y profesionales para construir soluciones web a medida. Mi experiencia abarca desde el diseño y desarrollo de sitios web completos hasta la implementación de APIs robustas y sistemas de gestión complejos. He liderado el ciclo de vida de proyectos, desde la conceptualización hasta el despliegue, asegurando soluciones eficientes y escalables.",
+            "detailSumary": [
+                "Me he consolidado como Desarrollador Full Stack independiente, construyendo soluciones web a medida para diversas empresas y profesionales.",
+                "Mi experiencia abarca desde el diseño y desarrollo de sitios web completos hasta la implementación de APIs robustas y sistemas de gestión complejos.",
+                "Lideré el ciclo de vida completo de proyectos, desde la conceptualización hasta el despliegue, asegurando soluciones eficientes y escalables."
+            ]
+        },
+        {
+            "position": "Desarrollador Full Stack & Diseñador UI/UX (Colaboración)",
+            "company": "Consultoría Digital",
+            "workMode": "Remoto",
+            "startDate": "ene. 2022",
+            "endDate": "mar. 2024",
+            "summary": "Colaboré estrechamente con una Diseñadora UI/UX Senior, Lucia Bertram, en el diseño y desarrollo de soluciones digitales para una cartera diversa de clientes. Inicié en el rol de Diseñador Gráfico y UI/UX, evolucionando hacia un perfil híbrido que combinaba mis habilidades en ilustración digital, prototipado en Figma y gestión de redes sociales, con el desarrollo web (PHP, MySQL, JavaScript, WordPress, HTML, CSS). Contribuí al ciclo completo de varios proyectos, desde la conceptualización y wireframing hasta la implementación final, ampliando mi experiencia en industrias variadas como contrucción (SUR ENERGY), deportes (FEBOCI) y legal (IALLJ), (CLRTD), además de desarrollar proyectos internos para la clínica Dentimagen 3D.",
+            "detailSumary": [
+                "Colaboré estrechamente con una Diseñadora UI/UX Senior, evolucionando hacia un perfil híbrido en soluciones digitales para una cartera diversa de clientes.",
+                "Combiné habilidades de ilustración digital, prototipado en Figma y gestión de redes sociales con el desarrollo web (PHP, MySQL, JavaScript, WordPress, HTML, CSS).",
+                "Contribuí al ciclo completo de varios proyectos (conceptualización, wireframing, implementación), ampliando mi experiencia en industrias como construcción (SUR ENERGY), deportes (FEBOCI), legal (IALLJ, CLRTD) y desarrollo de proyectos internos para Dentimagen 3D."
+            ]
+        },
+        {
+            "position": "Desarrollador Full Stack",
+            "company": "Dentimagen 3D",
+            "workMode": "Hibrido",
+            "startDate": "ago. 2022",
+            "endDate": "abr. 2023",
+            "summary": "Lideré el ciclo completo de desarrollo de una aplicación web personalizada para la gestión de servicios radiográficos dentales en Dentimagen 3D. Mi rol abarcó desde el levantamiento inicial de requerimientos con el personal de la clínica y la creación de wireframes y prototipos (con apoyo en UI/UX de Lucia Bertram), hasta el diseño de la base de datos, el desarrollo full-stack (frontend y backend) y la implementación final del sistema. Esta solución automatizó procesos clave, permitiendo el registro y control de historias clínicas y radiografías, la gestión de servicios vendidos, y la visualización de datos mediante gráficos de ventas y rendimiento. Mi trabajo optimizó las operaciones internas y facilitó una entrega de valor rápida y eficiente para pacientes y personal de la clínica.",
+            "detailSumary": [
+                "Lideré el ciclo completo de desarrollo de una aplicación web personalizada para la gestión de servicios radiográficos dentales.",
+                "Mi rol abarcó desde el levantamiento de requerimientos con el personal y la creación de wireframes y prototipos (con apoyo en UI/UX), hasta el diseño de la base de datos y el desarrollo full-stack (frontend y backend).",
+                "La solución automatizó procesos clave (registro y control de historias clínicas/radiografías, gestión de servicios vendidos) y facilitó la visualización de datos mediante gráficos de ventas y rendimiento.",
+                "Mi trabajo optimizó las operaciones internas y logró una entrega de valor rápida y eficiente para pacientes y personal de la clínica."
+            ]
+        },
+        {
+            "position": "Desarrollador Web Jr.",
+            "company": "Activos Fijos de Tarija",
+            "workMode": "Hibrido",
+            "startDate": "jul. 2019",
+            "endDate": "dic. 2019",
+            "summary": "En Activos Fijos de Tarija, participé en el desarrollo de un sistema web para la gestión y administración de vehículos. Trabajando en equipo, apliqué y fortalecí mis habilidades en el ciclo de vida del desarrollo de software, obteniendo valiosa experiencia práctica en un proyecto real.",
+            "detailSumary": [
+                "Participé en el desarrollo de un sistema web para la gestión y administración de vehículos.",
+                "Trabajando en equipo, apliqué y fortalecí mis habilidades en el ciclo de vida del desarrollo de software.",
+                "Obtuve valiosa experiencia práctica en un proyecto real de colaboración."
+            ]
+        }
+    ],
+    "education": [
+        {
+            "institution": "Oracle Next Education",
+            "location": "Online",
+            "title": "Backend Java Developer",
+            "startDate": "jul. 2025",
+            "endDate": "Actualidad"
+        },
+        {
+            "institution": "U.A.J.M.S. - Tarija",
+            "location": "Tarija, Bolivia",
+            "title": "Ingeniero Informatico",
+            "startDate": "mar. 2016",
+            "endDate": "oct. 2021"
+        }
+    ],
+    "certificates": [
+        {
+            "courseName": "Ver todos los certificados",
+            "issuingOrganization": "Linkedin",
+            "issueDate": "Actualidad",
+            "credentialUrl": "https://www.linkedin.com/in/alvinodev/details/certifications/"
+        },
+        {
+            "courseName": "Desarrollo de Aplicaciones Web con PHP y Laravel",
+            "issuingOrganization": "Udemy",
+            "issueDate": "mar. 2023",
+            "credentialUrl": ""
+        }
+    ],
+    "projects": [
+        {
+            "title": "Gestión de Contenido para Iglesia",
+            "client": "Freelance",
+            "image": "/3_cover.webp",
+            "summary": "Sistema de Gestión de Contenido para IBB Gracia, enfocado en sermones y transmisiones en vivo. Implementé acceso restringido a en vivos mediante códigos únicos, asegurando visualización solo para usuarios autorizados.",
+            "url": "https://iglesia.sbpgedu.com",
+            "skills": [
+                "laravel",
+                "php",
+                "mysql",
+                "tailwindcss"
+            ]
+        },
+        {
+            "title": "Gestión de Contenido para Blogs",
+            "client": "Freelance",
+            "image": "/4_cover.webp",
+            "summary": "Desarrollo de un Blog Digital (StoryBook) que sirvió como un proyecto fundamental para dominar Laravel, Blade y Tailwind CSS (con Flowbite). Esta plataforma me permitió implementar y gestionar funcionalidades avanzadas como categorías, publicaciones, roles y permisos de usuario, consolidando mis habilidades en el desarrollo FullStack.",
+            "url": "#",
+            "isLocal": true,
+            "skills": [
+                "laravel",
+                "php",
+                "mysql",
+                "tailwindcss"
+            ]
+        },
+        {
+            "title": "Landing Page - CLRTD",
+            "client": "Freelance - Diseño UI/UX (Colaboración)",
+            "image": "/6_cover.webp",
+            "summary": "Desarrollé una página web moderna para CLRTD, mejorando su presencia digital. Incluye calendario de eventos y enlaces a carrito de compra para cursos, optimizando la interacción y gestión de inscripciones.",
+            "url": "https://www.lrtdcentre.ca",
+            "skills": [
+                "wordpress",
+                "html5",
+                "css3",
+                "javascript"
+            ]
+        },
+        {
+            "title": "Sistema de Gestión de Radiografías Dentales",
+            "client": "DENTIMAGEN 3D",
+            "image": "/1_cover.webp",
+            "summary": "Desarrollé una aplicación web para la gestión de servicios radiográficos. La aplicación permitió registrar ventas, visualización de imágenes radiográficas, gestión de historiales médicos, generar informes, análisis de ventas y rendimiento.",
+            "url": "https://www.dentimagen3d.com",
+            "skills": [
+                "php",
+                "mysql",
+                "html5",
+                "figma",
+                "css3",
+                "bootstrap",
+                "javascript"
+            ]
+        },
+        {
+            "title": "Landing Page - SUR ENERGY",
+            "client": "Freelance - Diseño UI/UX (Colaboración)",
+            "image": "/5_cover.webp",
+            "summary": "Diseñé y desarrollé la página web oficial de la empresa SUR ENERGY, incluyendo un diseño web responsive y atractivo, integración de contenido informativo y multimedia, optimización SEO para mejorar el posicionamiento en buscadores.",
+            "url": "http://surenergy.com.bo",
+            "skills": [
+                "wordpress",
+                "html5",
+                "figma",
+                "css3",
+                "bootstrap",
+                "javascript"
+            ]
+        },
+        {
+            "title": "Rediseño web de IALLJ",
+            "client": "Freelance - Diseño UI/UX (Colaboración)",
+            "image": "/7_cover.webp",
+            "summary": "Realicé un rediseño completo del sitio web de la Asociación Internacional de Revistas de Derecho Laboral (IALLJ). Se migró el sitio web a WordPress, facilitando la gestión de contenidos y actualizaciones. Se creó un diseño web moderno y adaptable a cualquier dispositivo. Se simplificó la navegación, se optimizó la velocidad de carga.",
+            "url": "https://labourlawjournals.com",
+            "skills": [
+                "figma",
+                "wordpress",
+                "css3",
+                "javascript"
+            ]
+        },
+        {
+            "title": "Landing Page - FEBOCI",
+            "client": "Freelance - Diseño UI/UX (Colaboración)",
+            "image": "/8_cover.webp",
+            "summary": "Desarrollé la página web oficial de la Federación Boliviana de Ciclismo (FEBOCI), la página web presenta una estética moderna y profesional que refleja la imagen de la federación. Brinda información clara y completa sobre la federación, sus actividades y evento. Facilita la inscripción a las competencias de ciclismo.",
+            "url": "https://feboci.com",
+            "skills": [
+                "html5",
+                "css3",
+                "bootstrap",
+                "javascript"
+            ]
+        },
+        {
+            "title": "Sistema de Gestión de Inventario",
+            "client": "Freelance",
+            "image": "/4_cover.webp",
+            "summary": "Desarrollé un sistema web a medida para la gestión de inventario para una empresa unipersonal. La aplicación permitió agilizar los procesos de gestión de inventario, centralizar la información de todos los activos de la empresa, mejorar la toma de decisiones estratégicas, análisis de ventas y rendimiento.",
+            "url": "#",
+            "isLocal": true,
+            "skills": [
+                "php",
+                "mysql",
+                "html5",
+                "css3",
+                "bootstrap",
+                "javascript"
+            ]
+        }
+    ]
+}
