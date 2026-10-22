@@ -116,22 +116,25 @@ const headlineEnd = headlineRest.join(highlight);
 				<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 					
 					{ data.projects.map(project => (
-						<article class="project-card relative group isolate flex flex-col justify-end overflow-hidden rounded-2xl px-6 pb-6 pt-40 w-full min-h-96 lg:h-96 lg:px-8 lg:pb-8 lg:pt-40" data-skills={project.skills.join(',')}>
+						<article class="project-card group relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-6 pb-6 pt-40 w-full h-96 lg:px-8 lg:pb-8 cursor-pointer" data-skills={project.skills.join(',')}>
 							<img src={project.image} alt={project.title} class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 lg:group-hover:scale-105">
 
-							<!-- Degradado de fondo -->
-							<div class="absolute inset-0 bg-linear-to-t from-black/90 via-black/60 to-transparent lg:from-black/70 lg:via-black-900/40 lg:transition-opacity lg:duration-500 lg:group-hover:opacity-0"></div>
+							<!-- Degradado del estado colapsado -->
+							<div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-300 group-[.is-open]:opacity-0 lg:group-hover:opacity-0"></div>
 
-							<!-- Título visible solo en desktop -->
-							<div class="z-10 hidden lg:block lg:transition-opacity lg:duration-500 lg:group-hover:opacity-0">
+							<!-- Estado colapsado: título y pista de tap en mobile -->
+							<div class="z-10 transition-opacity duration-300 group-[.is-open]:opacity-0 lg:group-hover:opacity-0">
 								<div class="text-sm text-gray-300"> {project.title} </div>
+								<span class="mt-1 flex items-center gap-1 text-xs text-white/50 lg:hidden">
+									<i class="ri-hand-pointer-line"></i> Tocá para ver más
+								</span>
 							</div>
 
-							<!-- Detalle: siempre visible en mobile, al hover en desktop -->
-							<div class="z-10 flex flex-col lg:absolute lg:inset-0 lg:bg-black/90 lg:opacity-0 lg:transition-opacity lg:duration-500 lg:group-hover:opacity-100 lg:p-8">
+							<!-- Detalle: tap en mobile, hover en desktop -->
+							<div class="absolute inset-0 z-20 flex flex-col overflow-y-auto bg-black/90 p-6 opacity-0 pointer-events-none transition-opacity duration-300 group-[.is-open]:opacity-100 group-[.is-open]:pointer-events-auto lg:p-8 lg:group-hover:opacity-100 lg:group-hover:pointer-events-auto">
 								<span class="text-sm text-lightgray mb-2"> {project.client} </span>
 								<h3 class="text-2xl font-bold text-green-500 mb-3"> {project.title} </h3>
-								<p class="text-gray-300 text-sm mb-3"> {project.summary} </p>
+								<p class="text-sm text-gray-300 mb-3 line-clamp-5 lg:line-clamp-none"> {project.summary} </p>
 
 								{project.stack && project.stack.length > 0 && (
 									<p class="text-xs text-white/50 mb-4"> {project.stack.join(' · ')} </p>
@@ -240,9 +243,10 @@ const headlineEnd = headlineRest.join(highlight);
 <script>
 	import { jsPDF } from "jspdf";
 	import data from '../data/profile.json';
-	import { initProjectFilter } from '../scripts/projectFilter';
+	import { initProjectFilter, initProjectCardToggle } from '../scripts/projectFilter';
 
 	initProjectFilter();
+	initProjectCardToggle();
 
 	const successBanner = document.getElementById('contact-success');
 

@@ -120,7 +120,13 @@
             "courseName": "3er Lugar — Hackathon ONE G9 Latam",
             "issuingOrganization": "Alura Latam · No Country · Oracle Next Education",
             "issueDate": "ago. 2026",
-            "credentialUrl": ""
+            "credentialUrl": "https://credsverse.com/credentials/277a0841-ac65-4d6c-a02e-a8731b35536a"
+        },
+        {
+            "courseName": "Oracle Cloud Infrastructure 2025 Certified Foundations Associate",
+            "issuingOrganization": "Oracle",
+            "issueDate": "2025",
+            "credentialUrl": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=FBB04AE92E79DD6D21594E0F8B0A6FD67578C5A6A07A4B1825D0CBED64CC48BA"
         },
         {
             "courseName": "Ver todos los certificados",
@@ -149,13 +155,6 @@
                 "oracle",
                 "docker",
                 "tailwindcss"
-            ],
-            "stack": [
-                "Python + scikit-learn",
-                "FastAPI",
-                "Oracle DB",
-                "Docker",
-                "OCI"
             ]
         },
         {
